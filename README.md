@@ -1,65 +1,84 @@
-# EarningsGPT: Earnings Call Analyzer with AI-Powered Insights
+Earnings Call Summarizer: AI-Powered Insights from Earnings Calls
+Overview
+Earnings Call Summarizer is a powerful web application designed for investors and analysts to quickly extract actionable insights from earnings call recordings. Leveraging state-of-the-art speech-to-text, text embedding, and Retrieval Augmented Generation (RAG) with large language models, it delivers detailed analysis and question-answering on any earnings call, all within an intuitive web interface.
 
-## Overview
+Simply input a YouTube link to an earnings call—Earnings Call Summarizer will transcribe the audio, break the transcript into manageable sections, and let you ask targeted questions to get comprehensive, AI-generated answers.
 
-**EarningsGPT** is an advanced web application designed to help investors and analysts extract meaningful insights from earnings call recordings. The application leverages state-of-the-art speech-to-text transcription, text embedding, and AI-driven question-answering using Retrieval Augmented Generation (RAG) to provide users with a comprehensive analysis of earnings calls. By inputting a YouTube link to an earnings call, users can transcribe the audio, split the transcript into manageable chunks, and ask specific questions to get detailed answers, all within an intuitive web interface.
+Key Features
+Audio Download & Transcription
 
-RAG combines the power of retrieval systems and large language models (LLMs) to handle data not originally included in the LLM's training. This allows EarningsGPT to offer up-to-date insights from the latest earnings calls, ensuring investors have the most relevant information at their fingertips.
+Download audio from YouTube earnings call videos.
 
-## Features
+Convert speech to text using AssemblyAI for highly accurate transcription.
 
-1. **Audio Download and Transcription**
-   - Downloads audio from YouTube earnings call videos.
-   - Transcribes the audio using AssemblyAI to convert speech into text
+Text Chunking & Embedding
 
-2. **Text Chunking and Embedding**
-   - Splits the transcribed text into chunks for efficient processing
-   - Embeds the text chunks using SentenceTransformer to create vector representations for each chunk.
+Automatically split transcripts into processable chunks.
 
-3. **AI-Powered Question Answering with RAG**
-   - Utilizes a FAISS index to retrieve relevant chunks based on user queries.
-   - Generates detailed answers to user questions using OpenAI's GPT-3.5-turbo model.
+Generate vector representations of each chunk using SentenceTransformers.
 
-4. **Interactive Web Interface**
-   - Provides a user-friendly interface for entering YouTube URLs, analyzing earnings calls, and asking questions.
-   - Displays analysis progress with status messages and spinners.
+AI-Powered Question Answering with RAG
 
-## How It Works
-### Indexing Pipeline
-The indexing pipeline is responsible for all data pre-processing and for storing the pre-processed data in the so-called “index” of a vector database.
+Efficiently retrieve relevant transcript sections using a FAISS index.
 
-1. **Audio Download**
-   - The application takes a YouTube URL as input and uses yt-dlp to download the audio file.
-   - The downloaded audio is converted to MP3 format using ffmpeg.
+Generate detailed answers to user questions via OpenAI’s GPT-3.5-turbo.
 
-2. **Transcription**
-   - The MP3 audio file is uploaded to AssemblyAI for transcription.
-   - The resulting transcript is retrieved and stored for further processing.
+Interactive Web Interface
 
-3. **Text Processing**
-   - The transcript is split into chunks of manageable size.
-   - Each chunk is embedded into a vector representation using SentenceTransformer.
+Simple UI to enter YouTube URLs, track analysis progress, and ask questions.
 
-4. **Indexing**
-   - The embedded chunks are indexed using FAISS for efficient similarity search.
-  
-### Query Pipeline
-The query pipeline allows users to ask questions about the earnings calls. It includes two main steps: retrieval and generation.
+Real-time feedback on processing status.
 
-1. **Retrieval**
-   - The retrieval step selects the documents (chunks) to pass on to the language model.
-   - A sophisticated retrieval system is used, incorporating both vector and semantic retrieval.
-   - Initially, 40 candidate documents are fetched and then reranked using a ranking model to determine the most relevant documents.
+How It Works
+Indexing Pipeline
+Audio Download
 
-2. **Generation**
-   - The top 10 documents are used to prompt GPT-3.5 for an answer to the user’s question.
-   - GPT-3.5 generates a conversational, human-like response based on the provided documents.
+Input a YouTube URL; the app uses yt-dlp to download audio.
 
-## Setup and Installation
-1. Clone the Repository (git clone https://github.com/yourusername/EarningsGPT.git)
-2. Create and activiate a virtual environment
-      - python -m venv .venv
-      - source .venv/bin/activate   # On Windows use `.venv\Scripts\activate`
-3. Install the required packages (pip install -r requirements.txt)
-4. Replace 'assemblyaiapikey' and 'enter_open_AI_API_Key
-5. Run the application (streamlit run app.py) 
+Converts audio to MP3 format using ffmpeg.
+
+Transcription
+
+Uploads audio to AssemblyAI for transcription.
+
+Retrieves and stores the transcript.
+
+Text Processing
+
+Splits the transcript into manageable chunks.
+
+Embeds each chunk as a vector using SentenceTransformer.
+
+Indexing
+
+Indexes embedded chunks using FAISS for efficient similarity search.
+
+Query Pipeline
+Retrieval
+
+User submits a question about the earnings call.
+
+System retrieves the most relevant transcript chunks using vector search and reranks them with a semantic ranking model.
+
+Generation
+
+Top 10 relevant chunks are passed to GPT-3.5-turbo to generate a conversational, context-aware response.
+
+Setup & Installation
+Clone the Repository
+git clone https://github.com/yourusername/earnings-call-summarizer.git
+
+Create and Activate a Virtual Environment
+python -m venv .venv
+source .venv/bin/activate # On Windows: .venv\Scripts\activate
+
+Install Dependencies
+pip install -r requirements.txt
+
+Configure API Keys
+
+Replace 'assemblyaiapikey' and 'enter_open_AI_API_Key' in your config.
+
+Run the Application
+streamlit run app.py
+
